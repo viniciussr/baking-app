@@ -1,5 +1,7 @@
 package com.baking.model;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -9,7 +11,7 @@ import com.google.gson.TypeAdapter;
  */
 
 @AutoValue
-public abstract class Step {
+public abstract class Step implements Parcelable{
 
     public abstract Long id();
     public abstract String shortDescription();
@@ -17,18 +19,8 @@ public abstract class Step {
     public abstract String videoURL();
     public abstract String thumbnailURL();
 
-    @AutoValue.Builder
-    abstract static class Builder {
-        abstract Builder id(Long id);
-        abstract Builder shortDescription(String name);
-        abstract Builder description(String ingredients);
-        abstract Builder videoURL(String steps);
-        abstract Builder thumbnailURL(String servings);
-        abstract Step build();
-    }
-
-    static Builder builder() {
-        return new AutoValue_Step.Builder();
+    public static Step create(Long id, String shortDescription, String description,String videoURL,String thumbnailURL) {
+        return new AutoValue_Step(id, shortDescription, description, videoURL, thumbnailURL);
     }
 
     public static TypeAdapter<Step> typeAdapter(Gson gson) {

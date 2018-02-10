@@ -1,5 +1,7 @@
 package com.baking.model;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -9,22 +11,15 @@ import com.google.gson.TypeAdapter;
  */
 
 @AutoValue
-public abstract class Ingredient {
+public abstract class Ingredient implements Parcelable{
 
     public abstract Float quantity();
     public abstract String measure();
     public abstract String ingredient();
 
-    @AutoValue.Builder
-    abstract static class Builder {
-        abstract Builder quantity(Float quantity);
-        abstract Builder measure(String measure);
-        abstract Builder ingredient(String ingredient);
-        abstract Ingredient build();
-    }
 
-    static Builder builder() {
-        return new AutoValue_Ingredient.Builder();
+    public static Ingredient create(Float quantity, String measure, String ingredient) {
+        return new AutoValue_Ingredient(quantity, measure, ingredient);
     }
 
     public static TypeAdapter<Ingredient> typeAdapter(Gson gson) {
