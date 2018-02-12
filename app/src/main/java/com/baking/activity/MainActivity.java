@@ -1,4 +1,4 @@
-package com.baking;
+package com.baking.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baking.R;
 import com.baking.adapter.RecipeAdapter;
 import com.baking.model.Recipe;
 import com.baking.service.RecipeService;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
     }
 
 }

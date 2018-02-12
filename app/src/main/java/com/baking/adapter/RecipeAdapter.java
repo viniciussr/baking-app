@@ -13,6 +13,7 @@ import com.baking.model.Recipe;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 /**
@@ -39,7 +40,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         holder.bind(recipes.get(position));
-
     }
 
     @Override
@@ -53,8 +53,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     class RecipeViewHolder extends RecyclerView.ViewHolder  implements  View.OnClickListener {
-
-        Long id;
 
         @BindView(R.id.recipe_name)
         TextView recipeName;
@@ -77,7 +75,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         }
 
         protected void bind(Recipe recipe){
-            id = recipe.id();
             recipeName.setText(recipe.name());
             recipeServing.setText(recipe.servings().toString());
         }

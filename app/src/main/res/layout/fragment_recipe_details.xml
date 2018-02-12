@@ -9,21 +9,23 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:elevation="2dp"
-        app:cardBackgroundColor="#BBDEFB"
-        >
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardBackgroundColor="#BBDEFB">
 
         <TextView
             android:id="@+id/recipe_details_ingredients"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:layout_height="match_parent"
             android:textSize="15sp"
-            tools:text="Ingredients list:\nItem1\nItem2"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            tools:text="Ingredients list:\nItem1\nItem2" />
 
     </android.support.v7.widget.CardView>
 
@@ -31,6 +33,6 @@
         android:id="@+id/recipe_details_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        />
 
 </LinearLayout>

@@ -3,11 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp"
-    tools:context="com.baking.RecipeFragment">
+    tools:context="com.baking.fragment.RecipeFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_recipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/error_message_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/error_message"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </FrameLayout>

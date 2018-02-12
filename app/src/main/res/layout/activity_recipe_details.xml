@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baking.RecipeDetailsActivity">
+    tools:context="com.baking.activity.RecipeDetailsActivity">
 
     <fragment
         android:id="@+id/fragment_recipe_details"
-        android:name="com.baking.RecipeDetailsFragment"
+        android:name="com.baking.fragment.RecipeDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_recipe_details" />
