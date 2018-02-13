@@ -15,18 +15,11 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.RecipeDetailsActivity" />
-        <activity
-            android:name=".activity.RecipeStepActivity"
-            android:parentActivityName=".activity.RecipeDetailsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.RecipeDetailsActivity" />
-        </activity>
+        <activity android:name=".activity.RecipeStepActivity"/>
 
         <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
@@ -38,12 +31,11 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <activity android:name=".ConfigurationActivity">
+        <activity android:name=".widget.WidgetConfigurationActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        <activity android:name=".widget.WidgetConfigurationActivity"></activity>
     </application>
 
 </manifest>
