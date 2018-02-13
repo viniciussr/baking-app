@@ -16,7 +16,6 @@ public class RecipeStepActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_step);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
     }
 
     @Override

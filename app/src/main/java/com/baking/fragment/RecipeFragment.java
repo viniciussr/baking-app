@@ -2,11 +2,13 @@ package com.baking.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +19,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baking.R;
+import com.baking.activity.MainActivity;
 import com.baking.activity.RecipeDetailsActivity;
 import com.baking.adapter.RecipeAdapter;
+import com.baking.idlingresource.RecipeIdlingResource;
 import com.baking.model.Recipe;
 import com.baking.service.RecipeService;
 import com.baking.service.ServiceFactory;
@@ -35,7 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class RecipeFragment extends Fragment implements  RecipeAdapter.RecipeClickOnClickHandler{
+public class RecipeFragment extends Fragment implements RecipeAdapter.RecipeClickOnClickHandler {
 
     @BindView(R.id.recyclerview_recipe)
     RecyclerView recyclerView;
@@ -64,7 +68,7 @@ public class RecipeFragment extends Fragment implements  RecipeAdapter.RecipeCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-        unbinder = ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -78,27 +82,33 @@ public class RecipeFragment extends Fragment implements  RecipeAdapter.RecipeCli
         }
     }
 
-    private void load(){
-        RecipeService service = ServiceFactory.create(RecipeService.class,RecipeService.ENDPOINT);
+    private void load() {
+        RecipeIdlingResource idlingResource = ((MainActivity)getActivity()).getRecipeIdlingResource();
+        if ( idlingResource != null) {
+            idlingResource.setIdleState(false);
+        }
+        RecipeService service = ServiceFactory.create(RecipeService.class, RecipeService.ENDPOINT);
         Observable<ArrayList<Recipe>> observable = service.getRecipes();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(recipes -> {
-
-                    if(twoPaneMode){
+                    if (twoPaneMode) {
                         adapter = new RecipeAdapter(this);
                         adapter.setRecipeData(recipes);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(adapter);
-                    }else{
+                    } else {
                         recyclerView.setHasFixedSize(true);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                         recyclerView.setLayoutManager(layoutManager);
                         adapter = new RecipeAdapter(this);
                         adapter.setRecipeData(recipes);
                         recyclerView.setAdapter(adapter);
+                    }
+                    if (idlingResource != null) {
+                        idlingResource.setIdleState(true);
                     }
                 });
     }

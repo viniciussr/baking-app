@@ -28,10 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdapter.RecipeDetailsClickOnClickHandler
-{
-
-
+public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdapter.RecipeDetailsClickOnClickHandler {
     @BindView(R.id.recipe_details_ingredients)
     TextView recipeDetailsIngredients;
     @BindView(R.id.recipe_details_steps)
@@ -65,7 +62,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
-        unbinder = ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         recipe = (Recipe) getActivity().getIntent().getExtras().getParcelable(intentDetail);
         return view;
     }
@@ -86,12 +83,12 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
             float quantity = ingredient.quantity();
             String measure = ingredient.measure();
             sb.append("\n");
-            sb.append(name +" - "+quantity+" - "+measure);
+            sb.append(name + " - " + quantity + " - " + measure);
         }
         recipeDetailsIngredients.setText(sb);
     }
 
-    private void loadSteps(){
+    private void loadSteps() {
         recyclerViewSteps.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewSteps.setLayoutManager(layoutManager);
@@ -100,22 +97,22 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
         recyclerViewSteps.setAdapter(adapter);
         recyclerViewSteps
                 .addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        if(twoPaneMode){
-            onClick(recipe.steps().get(0),0);
+        if (twoPaneMode) {
+            onClick(recipe.steps().get(0), 0);
         }
     }
 
     @Override
     public void onClick(Step step, int position) {
-        if(twoPaneMode){
+        if (twoPaneMode) {
             RecipeStepItemFragment fragment = RecipeStepItemFragment.newInstance(step);
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.replace(R.id.recipe_step_container, fragment);
             transaction.commit();
-        }else{
+        } else {
             Intent intent = new Intent(getActivity(), RecipeStepActivity.class);
             intent.putExtra(intentDetail, recipe.steps());
-            intent.putExtra(stepPosition,position);
+            intent.putExtra(stepPosition, position);
             startActivity(intent);
         }
     }

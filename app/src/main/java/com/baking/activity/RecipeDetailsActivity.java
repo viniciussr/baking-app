@@ -1,5 +1,9 @@
 package com.baking.activity;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.baking.R;
+import com.baking.idlingresource.RecipeIdlingResource;
 import com.baking.model.Recipe;
 
 import butterknife.BindString;
@@ -27,7 +32,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(((Recipe) getIntent().getExtras().
                 getParcelable(intentDetail)).name());
-
     }
 
     @Override
