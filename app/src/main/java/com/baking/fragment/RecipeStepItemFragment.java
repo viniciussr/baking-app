@@ -32,6 +32,7 @@ import com.google.android.exoplayer2.util.Util;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindBool;
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +55,7 @@ public class RecipeStepItemFragment extends Fragment {
     @BindView(R.id.recipe_step_video)
     SimpleExoPlayerView exoPlayerView;
 
-//    @BindBool(R.bool.two_pane_mode)
+    @BindBool(R.bool.two_pane_mode)
     boolean isTwoPane;
 
     SimpleExoPlayer exoPlayer;
