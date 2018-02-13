@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -95,14 +97,26 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
         adapter = new RecipeDetailsAdapter(this);
         adapter.setStepData(recipe.steps());
         recyclerViewSteps.setAdapter(adapter);
+        recyclerViewSteps
+                .addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        if(twoPaneMode){
+            onClick(recipe.steps().get(0),0);
+        }
     }
 
     @Override
     public void onClick(Step step, int position) {
-        Intent intent = new Intent(getActivity(), RecipeStepActivity.class);
-        intent.putExtra(intentDetail, recipe.steps());
-        intent.putExtra(stepPosition,position);
-        startActivity(intent);
+        if(twoPaneMode){
+            RecipeStepItemFragment fragment = RecipeStepItemFragment.newInstance(step);
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.recipe_step_container, fragment);
+            transaction.commit();
+        }else{
+            Intent intent = new Intent(getActivity(), RecipeStepActivity.class);
+            intent.putExtra(intentDetail, recipe.steps());
+            intent.putExtra(stepPosition,position);
+            startActivity(intent);
+        }
     }
 
     @Override

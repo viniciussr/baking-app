@@ -2,11 +2,13 @@ package com.baking.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.baking.service.ServiceFactory;
 
 import java.util.ArrayList;
 
+import butterknife.BindBool;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +44,9 @@ public class RecipeFragment extends Fragment implements  RecipeAdapter.RecipeCli
 
     @BindString(R.string.intent_detail_put_extra)
     String intentDetail;
+
+    @BindBool(R.bool.two_pane_mode)
+    boolean twoPaneMode;
 
     private Unbinder unbinder;
     private RecipeAdapter adapter;
@@ -79,13 +85,21 @@ public class RecipeFragment extends Fragment implements  RecipeAdapter.RecipeCli
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(recipes -> {
-                    recyclerView.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                    recyclerView.setLayoutManager(layoutManager);
 
-                    adapter = new RecipeAdapter(this);
-                    adapter.setRecipeData(recipes);
-                    recyclerView.setAdapter(adapter);
+                    if(twoPaneMode){
+                        adapter = new RecipeAdapter(this);
+                        adapter.setRecipeData(recipes);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(adapter);
+                    }else{
+                        recyclerView.setHasFixedSize(true);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(layoutManager);
+                        adapter = new RecipeAdapter(this);
+                        adapter.setRecipeData(recipes);
+                        recyclerView.setAdapter(adapter);
+                    }
                 });
     }
 
