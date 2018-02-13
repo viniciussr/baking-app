@@ -35,8 +35,7 @@
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/picasa_icon"
-                />
+                tools:src="@drawable/picasa_icon" />
 
             <TextView
                 android:id="@+id/recipe_step_desc"
@@ -60,9 +59,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -10,4 +10,8 @@
 
     <string name="error_message">An error has occurred.</string>
 
+    <string name="appwidget_text">Baking Widget</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_ok_button">OK</string>
+
 </resources>
