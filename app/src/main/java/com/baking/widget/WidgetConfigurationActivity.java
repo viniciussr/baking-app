@@ -31,6 +31,8 @@ public class WidgetConfigurationActivity extends AppCompatActivity {
 
     private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private ArrayList<Recipe> recipes;
+    private static final int START_INDEX = 0;
+    private static final int MIN_SIZE = 0;
 
 
     @Override
@@ -63,8 +65,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // Fill the radioGroup
-                            int currentIndex = 0;
-
+                            int currentIndex = START_INDEX;
                             for (Recipe recipe : recipes) {
                                 AppCompatRadioButton button = new AppCompatRadioButton(this);
                                 button.setText(recipe.name());
@@ -72,9 +73,8 @@ public class WidgetConfigurationActivity extends AppCompatActivity {
                                 namesRadioGroup.addView(button);
                             }
 
-                            // Check the first item when loaded
-                            if (namesRadioGroup.getChildCount() > 0) {
-                                ((AppCompatRadioButton) namesRadioGroup.getChildAt(0)).setChecked(true);
+                            if (namesRadioGroup.getChildCount() > MIN_SIZE) {
+                                ((AppCompatRadioButton) namesRadioGroup.getChildAt(START_INDEX)).setChecked(true);
                             }
                         }
                     });

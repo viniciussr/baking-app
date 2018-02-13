@@ -31,7 +31,6 @@ import butterknife.Unbinder;
 public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdapter.RecipeDetailsClickOnClickHandler
 {
 
-    final static String INGREDIENT_HEADER = "Ingredients:";
 
     @BindView(R.id.recipe_details_ingredients)
     TextView recipeDetailsIngredients;
@@ -42,6 +41,8 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
     String intentDetail;
     @BindString(R.string.step_position)
     String stepPosition;
+    @BindString(R.string.ingredients_header)
+    String ingredientsHeader;
 
     @BindBool(R.bool.two_pane_mode)
     boolean twoPaneMode;
@@ -79,7 +80,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
 
     public void loadIngredients() {
         StringBuilder sb = new StringBuilder();
-        sb.append(INGREDIENT_HEADER);
+        sb.append(ingredientsHeader);
         for (Ingredient ingredient : recipe.ingredients()) {
             String name = ingredient.ingredient();
             float quantity = ingredient.quantity();

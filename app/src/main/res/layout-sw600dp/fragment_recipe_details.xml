@@ -29,7 +29,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="24dp"
                 android:textSize="15sp"
-                tools:text="Ingredients list:\nItem1\nItem2" />
+                />
 
         </android.support.v7.widget.CardView>
 

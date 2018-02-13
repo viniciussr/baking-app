@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold"
-        tools:text="Nutella Pie" />
+         />
 
     <LinearLayout
         android:id="@+id/w_ingredients"
